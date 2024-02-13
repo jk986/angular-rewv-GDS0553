@@ -1,31 +1,45 @@
-<form [formGroup]="registerForma" >
+<form [formGroup]="registerForma" (ngSubmit)="sendUser()" >
     <p-card header="Registrar Miembro" [style]="{width:'360px'}">
-        
+        <!-- Campo Nombre -->
         <div class="field">
             <input type="text" pInputText formControlName="fullName" placeholder="Nombre Completo" class="w-full" />
+            <small *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+                <div *ngIf="fullName.hasError('required')">Ingresa Nombre Completo</div>
+                <div *ngIf="fullName.hasError('fullName')">Nombre Incorrecto</div>
+            </small>
         </div>
         
-        <small *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
-            <div *ngIf="fullName.hasError('required')">Ingresa Nombre Completo</div>
-            <div *ngIf="fullName.hasError('fullName')">Nombre Incorrecto</div>
-        </small>
         
+        <!-- Campo Email -->
         <div class="field">
             <input type="text" pInputText formControlName="email" placeholder="Ingresa Email" class="w-full" />
+            <small *ngIf="email.invalid && (email.dirty || email.touched)">
+                <div *ngIf="fullName.hasError('required')">Ingresa Email</div>
+                <div *ngIf="fullName.hasError('email')">Email Incorrecto</div>
+            </small>
         </div>
         
         
+        <!-- Campo Password -->
         <div class="field">
             <!-- <p-password formControlName="pass" [feedback]="false" placeholder="Password" styleClass="w-full"></p-password> -->
             <p-password formControlName="pass" [toggleMask]="true"></p-password>
-        </div>
-        
-        <div class="field">
-            <p-password formControlName="confirmPass" [toggleMask]="true"></p-password>
+            <small *ngIf="pass.invalid && (pass.dirty || pass.touched)">
+                <div *ngIf="pass.hasError('required')">Campo Obligatorio</div>
+            </small>
         </div>
 
+        
+        <!-- Campo Confirm Pass -->
         <div class="field">
-            <p-button label="Ingresar" styleClass="w-full" ></p-button>
+            <p-password formControlName="confirmPass" [toggleMask]="true"></p-password>
+            <small *ngIf="confirmPass.invalid && (confirmPass.dirty || confirmPass.touched)">
+                <div *ngIf="confirmPass.hasError('required')">Campo Obligatorio</div>
+            </small>
+        </div>
+        <!-- Boton Submit -->
+        <div class="field">
+            <p-button type="submit" label="Ingresar" styleClass="w-full" ></p-button>
         </div>
         
         <div class="mt-2">

@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": "f3df",
+      "fullName": "",
+      "email": "",
+      "pass": ""
+    },
+    {
+      "id": "240f",
+      "fullName": "",
+      "email": "",
+      "pass": ""
+    },
+    {
+      "id": "f170",
+      "fullName": "",
+      "email": "",
+      "pass": "",
+      "confirmPass": ""
+    },
+    {
+      "id": "81a9",
+      "fullName": "JK",
+      "email": "jk@email.com",
+      "pass": "12345678"
+    },
+    {
+      "id": "4fc2",
+      "fullName": "",
+      "email": "",
+      "pass": ""
+    },
+    {
+      "id": "e317",
+      "fullName": "",
+      "email": "",
+      "pass": ""
+    },
+    {
+      "id": "1a5a",
+      "fullName": "Test",
+      "email": "uno@email.com",
+      "pass": "12345678"
+    }
+  ]
+}

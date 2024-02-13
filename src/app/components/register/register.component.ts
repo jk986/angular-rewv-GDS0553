@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../interfaces/user';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,26 +11,49 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-///
+  ///
   registerForma = this.fb.group({
-    fullName:['',[Validators.required]],
-    email:['',[Validators.email,Validators.required]],
-    pass:['',[Validators.required]],
-    confirmPass:['',[Validators.required]]
+    fullName: ['', [Validators.required]],
+    email: ['', [Validators.email, Validators.required]],
+    pass: ['', [Validators.required]],
+    confirmPass: ['', [Validators.required]]
   });
-///
-  constructor(private fb:FormBuilder){}
-///
+  ///
+  constructor(
+    private fb: FormBuilder,
+    private _authS: AuthService,
+    private _messageS: MessageService,
+    private _router: Router
+  ) { }
+  ///
 
-  get email(){
+  get email() {
     return this.registerForma.controls['fullName'];
   }
-  get fullName(){
+  get fullName() {
     return this.registerForma.controls['email'];
-  }get pass(){
+  } get pass() {
     return this.registerForma.controls['pass'];
   }
-  get confirmPass(){
+  get confirmPass() {
     return this.registerForma.controls['confirmPass'];
+  }
+
+  sendUser() {
+    console.log("Esto enviando datos");
+    //Guarda los datos
+    const datos = { ...this.registerForma.value };
+    delete datos.confirmPass;
+    this._authS.registerUser(datos as User).subscribe(
+      res => {
+        this._messageS.add({ severity: 'success', summary: 'Success', detail: 'Registro Exitoso' });
+        setTimeout(() => {
+          this._router.navigate(['login']);
+        }, 1000);
+
+      },
+      error => {
+        this._messageS.add({ severity: 'error', summary: 'Error', detail: 'Registro Fallido' });
+      });
   }
 }
