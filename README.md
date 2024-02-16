@@ -34,4 +34,3 @@
 # Ingresar a la url 
 - Para visualizar el 
 http://localhost:4200/login
-

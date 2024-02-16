@@ -5,7 +5,7 @@
             <input type="text" pInputText formControlName="fullName" placeholder="Nombre Completo" class="w-full" />
             <small *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
                 <div *ngIf="fullName.hasError('required')">Ingresa Nombre Completo</div>
-                <div *ngIf="fullName.hasError('fullName')">Nombre Incorrecto</div>
+                <div *ngIf="fullName.hasError('pattern')">Ingresa Nombre Completo</div>
             </small>
         </div>
         
@@ -14,8 +14,8 @@
         <div class="field">
             <input type="text" pInputText formControlName="email" placeholder="Ingresa Email" class="w-full" />
             <small *ngIf="email.invalid && (email.dirty || email.touched)">
-                <div *ngIf="fullName.hasError('required')">Ingresa Email</div>
-                <div *ngIf="fullName.hasError('email')">Email Incorrecto</div>
+                <div *ngIf="email.hasError('required')">Ingresa Email</div>
+                <div *ngIf="email.hasError('email')">Email Incorrecto</div>
             </small>
         </div>
         
@@ -36,10 +36,14 @@
             <small *ngIf="confirmPass.invalid && (confirmPass.dirty || confirmPass.touched)">
                 <div *ngIf="confirmPass.hasError('required')">Campo Obligatorio</div>
             </small>
+
+            <small *ngIf="registerForma.errors?.['passwordMismatch'] && confirmPass.valid && pass.valid">
+                <p>Contraseñas no coinciden </p>
+            </small>
         </div>
         <!-- Boton Submit -->
         <div class="field">
-            <p-button type="submit" label="Ingresar" styleClass="w-full" ></p-button>
+            <p-button type="submit" label="Ingresar" styleClass="w-full" [disabled]="registerForma.invalid" ></p-button>
         </div>
         
         <div class="mt-2">

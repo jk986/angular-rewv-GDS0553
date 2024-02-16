@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { passwordMatchValidator } from '../../shared/password-match.directives';
 
 @Component({
   selector: 'app-register',
@@ -13,10 +14,12 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   ///
   registerForma = this.fb.group({
-    fullName: ['', [Validators.required]],
+    fullName: ['', [Validators.required,Validators.pattern]],
     email: ['', [Validators.email, Validators.required]],
     pass: ['', [Validators.required]],
     confirmPass: ['', [Validators.required]]
+  },{
+    validators:passwordMatchValidator
   });
   ///
   constructor(
