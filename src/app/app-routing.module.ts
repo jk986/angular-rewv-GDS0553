@@ -8,7 +8,7 @@ import { authGuard } from './guardias/auth.guard';
 const routes: Routes = [
   {path:'login', component:LoginComponent, title:"Login"},
   {path:'register', component:RegisterComponent, title:"Register"},
-  {path:'home', component:HomeComponent, title:"Home"},
+  {path:'home', component:HomeComponent, title:"Home",canActivate:[authGuard]},
   {path:'', redirectTo:'login', pathMatch:'full'}
 ];
 
